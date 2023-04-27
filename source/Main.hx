@@ -15,6 +15,7 @@ class Main extends Sprite
 
 		// PARAMS: new(gameWidth:Int = 0, gameHeight:Int = 0, ?initialState:Class<FlxState>, updateFramerate:Int = 60,
 		// drawFramerate:Int = 60, skipSplash:Bool = false, startFullscreen:Bool = false)
-		addChild(new FlxGame(320, 240, MenuState, false)); // what does false do again?
+		addChild(new FlxGame(240, 160, MenuState, false)); // what does false do again?
+		// addChild(new FlxGame(1920, 1080, MenuState, false)); // what does false do again?
 	}
 }
