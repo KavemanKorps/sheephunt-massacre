@@ -915,7 +915,7 @@ ApplicationMain.main = function() {
 ApplicationMain.create = function(config) {
 	var app = new openfl_display_Application();
 	ManifestResources.init(config);
-	app.meta.h["build"] = "8";
+	app.meta.h["build"] = "9";
 	app.meta.h["company"] = "HaxeFlixel";
 	app.meta.h["file"] = "shooter-game";
 	app.meta.h["name"] = "shooter-game";
@@ -8375,13 +8375,13 @@ flixel_FlxSprite.prototype = $extend(flixel_FlxObject.prototype,{
 	,__class__: flixel_FlxSprite
 	,__properties__: $extend(flixel_FlxObject.prototype.__properties__,{set_clipRect:"set_clipRect",set_color:"set_color",set_blend:"set_blend",set_flipY:"set_flipY",set_flipX:"set_flipX",set_facing:"set_facing",set_alpha:"set_alpha",set_graphic:"set_graphic",set_frames:"set_frames",set_frame:"set_frame",set_pixels:"set_pixels",get_pixels:"get_pixels",set_antialiasing:"set_antialiasing",set_useFramePixels:"set_useFramePixels"})
 });
-var Orc = function() {
+var Orc = function(x,y) {
 	this.dists = [10,25,50];
-	flixel_FlxSprite.call(this);
+	flixel_FlxSprite.call(this,x,y);
 	this.makeGraphic(10,10,-16776961);
+	this._originalX = x;
 	flixel_FlxG.random.int(null,null,this.dists);
 	this.velocity.set_x(-10);
-	flixel_FlxSprite.call(this,flixel_FlxG.width / 2 - 6,flixel_FlxG.height - 12,"assets/ship.png");
 };
 $hxClasses["Orc"] = Orc;
 Orc.__name__ = "Orc";
@@ -8427,7 +8427,7 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		var _g1 = numOrcs;
 		while(_g < _g1) {
 			var i = _g++;
-			o = new Orc();
+			o = new Orc(240 + i % 10 * 32,100 + (i / 10 | 0) * 32);
 			this._orcs.add(o);
 		}
 		this.add(this._orcs);
@@ -75808,7 +75808,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 379351;
+	this.version = 619086;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";

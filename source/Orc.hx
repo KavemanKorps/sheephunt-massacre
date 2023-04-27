@@ -10,19 +10,19 @@ class Orc extends FlxSprite
 
 	var dists:Array<Int> = [10, 25, 50];
 
-	public function new()
+	public function new(x:Int, y:Int)
 	{
-		super();
+		super(x, y);
 		makeGraphic(10, 10, FlxColor.BLUE);
+		_originalX = x;
 
-		// o = new Orc(240 + (i % 10) * 32, 100 + Std.int(i / 10) * 32);
-
-		// _originalX = x;
 		FlxG.random.int(dists);
+
 		velocity.x = -10;
+
 		// This initializes this sprite object with the graphic of the ship and
 		// positions it where I want it. ARGS: (x, y, image)
-		super(FlxG.width / 2 - 6, FlxG.height - 12, "assets/ship.png");
+		// super(FlxG.width / 2 - 6, FlxG.height - 12, "assets/ship.png");
 	}
 
 	override public function update(elapsed:Float):Void
