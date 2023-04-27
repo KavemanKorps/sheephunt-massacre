@@ -50,8 +50,8 @@ class PlayState extends FlxState
 		{
 			// Orc() args: (x, y)
 			// i need to position them off-screen to the right, at three different heights (2 air, 1 ground)
-			// o = new Orc(8 + (i % 10) * 32, 24 + Std.int(i / 10) * 32);
-			o = new Orc(240 + (i % 10) * 32, 100 + Std.int(i / 10) * 32);
+			// o = new Orc(240 + (i % 10) * 32, 100 + Std.int(i / 10) * 32);
+			o = new Orc();
 			_orcs.add(o);
 		}
 		add(_orcs);
