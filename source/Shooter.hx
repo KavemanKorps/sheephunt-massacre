@@ -15,4 +15,29 @@ class Shooter extends FlxSprite
 		super(x, y);
 		makeGraphic(10, 10, FlxColor.BLUE);
 	}
+
+	// basic game loop
+	override public function update(elapsed:Float):Void
+	{
+		if (FlxG.keys.anyPressed([DOWN, S]))
+		{
+			// TODO
+		}
+		// If the player is pressing right, then right 100
+		if (FlxG.keys.anyPressed([UP, W]))
+		{
+			// TODO
+		}
+		super.update(elapsed);
+
+		if (FlxG.keys.justPressed.SPACE)
+		{
+			// Space bar was pressed! FIRE A BULLET
+			var playState:PlayState = cast FlxG.state; // what this do?
+			var bullet:FlxSprite = playState.bullets.recycle();
+			bullet.reset(x + width / 2 - bullet.width / 2, y);
+			bullet.velocity.y = 140;
+		}
+		super.update(elapsed); // why do we need this twice?
+	}
 }

@@ -915,7 +915,7 @@ ApplicationMain.main = function() {
 ApplicationMain.create = function(config) {
 	var app = new openfl_display_Application();
 	ManifestResources.init(config);
-	app.meta.h["build"] = "6";
+	app.meta.h["build"] = "7";
 	app.meta.h["company"] = "HaxeFlixel";
 	app.meta.h["file"] = "shooter-game";
 	app.meta.h["name"] = "shooter-game";
@@ -8580,7 +8580,20 @@ $hxClasses["Shooter"] = Shooter;
 Shooter.__name__ = "Shooter";
 Shooter.__super__ = flixel_FlxSprite;
 Shooter.prototype = $extend(flixel_FlxSprite.prototype,{
-	__class__: Shooter
+	update: function(elapsed) {
+		var tmp = flixel_FlxG.keys.checkKeyArrayState([40,83],1);
+		var tmp = flixel_FlxG.keys.checkKeyArrayState([38,87],1);
+		flixel_FlxSprite.prototype.update.call(this,elapsed);
+		var _this = flixel_FlxG.keys.justPressed;
+		if(_this.keyManager.checkStatusUnsafe(32,_this.status)) {
+			var playState = flixel_FlxG.game._state;
+			var bullet = playState.bullets.recycle();
+			bullet.reset(this.x + this.get_width() / 2 - bullet.get_width() / 2,this.y);
+			bullet.velocity.set_y(140);
+		}
+		flixel_FlxSprite.prototype.update.call(this,elapsed);
+	}
+	,__class__: Shooter
 });
 var Std = function() { };
 $hxClasses["Std"] = Std;
