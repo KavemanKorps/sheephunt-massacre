@@ -31,7 +31,7 @@ class PlayState extends FlxState
 		for (i in 0...numBullets)
 		{
 			sprite = new FlxSprite(-100, -100);
-			sprite.makeGraphic(2, 8);
+			sprite.makeGraphic(8, 2);
 			sprite.exists = false;
 
 			bullets.add(sprite);
