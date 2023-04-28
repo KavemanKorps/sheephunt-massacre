@@ -11,6 +11,8 @@ import flixel.text.FlxText;
 
 class PlayState extends FlxState
 {
+	public var enemiesToSpawn:Int = 0;
+
 	public var bullets:FlxTypedGroup<FlxSprite>;
 
 	var _sheep:Shooter;
@@ -37,13 +39,21 @@ class PlayState extends FlxState
 		add(bullets);
 
 		// ORC SPAWN STUFF:
+		var heights:Array<Int> = [200, 240];
+		var spawns:Array<Int> = [10, 15, 35, 50];
+
 		var numOrcs:Int = 20;
 		_orcs = new FlxTypedGroup(numOrcs);
 		var o:Orc;
 
 		for (i in 0...numOrcs)
 		{
-			o = new Orc(240 + (i % 10) * 32, 100 + Std.int(i / 10) * 32);
+			// ORIGINAL:
+			// a = new Alien(8 + (i % 10) * 32, 24 + Std.int(i / 10) * 32, colors[Std.int(i / 10)], alienBullets);
+
+			// X, Y
+			// "+ Std.int(i / 10) * 32" is what breaks it into two rows
+			o = new Orc(240 + (i * FlxG.random.int(10, 20)), 100 + Std.int(i / 10) * 32);
 
 			_orcs.add(o);
 		}
