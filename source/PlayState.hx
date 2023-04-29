@@ -8,24 +8,28 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxGroup;
 import flixel.system.FlxSound;
 import flixel.text.FlxText;
+import flixel.util.FlxColor;
 
-// TODO: IF SHOOTER GETS TOUCHED BY ENEMY, DIE.
+// TODO: IF SHOOTER GETS TOUCHED BY ENEMY, DIE. DONE
 class PlayState extends FlxState
 {
 	public var enemiesToSpawn:Int = 0;
 
 	public var bullets:FlxTypedGroup<FlxSprite>;
 
-	var _sheep:Shooter;
+	var _sheep:Shooter; // WE ARE SIMPLY INITIALIZING OUR VAR. THE ARGS PASSED BELOW v
 	var _vsBullets:FlxGroup;
+	var _orcs:FlxTypedGroup<Orc>;
+	var _house:House;
 
 	var won:Bool;
-
-	var _orcs:FlxTypedGroup<Orc>;
 
 	override public function create()
 	{
 		FlxG.mouse.visible = false;
+
+		_house = new House(0, 0);
+		add(_house);
 
 		var numBullets:Int = 8;
 		bullets = new FlxTypedGroup(numBullets);
@@ -34,7 +38,9 @@ class PlayState extends FlxState
 		for (i in 0...numBullets)
 		{
 			sprite = new FlxSprite(-100, -100);
-			sprite.makeGraphic(8, 2);
+
+			// HERE IS WHERE THE BULLET IS FORMED
+			sprite.makeGraphic(2, 2, FlxColor.WHITE);
 			sprite.exists = false;
 
 			bullets.add(sprite);
@@ -62,11 +68,11 @@ class PlayState extends FlxState
 		}
 		add(_orcs);
 
-		_sheep = new Shooter(30, 130);
+		_sheep = new Shooter(30, 135); // 130 HEIGHT
 		add(_sheep);
 
 		_vsBullets = new FlxGroup();
-		_vsBullets.add(_orcs);
+		_vsBullets.add(_orcs); // kill orcs when touched by bullets
 
 		super.create();
 	}
@@ -97,7 +103,11 @@ class PlayState extends FlxState
 		super.update(elapsed);
 
 		FlxG.overlap(bullets, _vsBullets, stuffHitStuff);
-
 		FlxG.overlap(_sheep, _orcs, orcTouchSheep);
+
+		// if (_orcs.x < 0)
+		// {
+		// 	doneFadeOut();
+		// }
 	}
 }
