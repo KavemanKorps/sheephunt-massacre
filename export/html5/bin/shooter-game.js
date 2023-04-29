@@ -915,7 +915,7 @@ ApplicationMain.main = function() {
 ApplicationMain.create = function(config) {
 	var app = new openfl_display_Application();
 	ManifestResources.init(config);
-	app.meta.h["build"] = "14";
+	app.meta.h["build"] = "15";
 	app.meta.h["company"] = "HaxeFlixel";
 	app.meta.h["file"] = "shooter-game";
 	app.meta.h["name"] = "shooter-game";
@@ -8535,10 +8535,14 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		_sheep.kill();
 		this.doneFadeOut();
 	}
+	,orcTouchHouse: function(_house,enemy) {
+		this.doneFadeOut();
+	}
 	,update: function(elapsed) {
 		flixel_FlxState.prototype.update.call(this,elapsed);
 		flixel_FlxG.overlap(this.bullets,this._vsBullets,$bind(this,this.stuffHitStuff));
 		flixel_FlxG.overlap(this._sheep,this._orcs,$bind(this,this.orcTouchSheep));
+		flixel_FlxG.overlap(this._house,this._orcs,$bind(this,this.orcTouchHouse));
 	}
 	,__class__: PlayState
 });

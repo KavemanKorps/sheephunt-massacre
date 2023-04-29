@@ -98,12 +98,22 @@ class PlayState extends FlxState
 		doneFadeOut();
 	}
 
+	function orcTouchHouse(_house:House, enemy:Orc)
+	{
+		// if (player.alive && player.exists && enemy.alive && enemy.exists && !enemy.isFlickering())
+		// {
+		// 	startCombat(enemy);
+		// }
+		doneFadeOut();
+	}
+
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
 
 		FlxG.overlap(bullets, _vsBullets, stuffHitStuff);
 		FlxG.overlap(_sheep, _orcs, orcTouchSheep);
+		FlxG.overlap(_house, _orcs, orcTouchHouse);
 
 		// if (_orcs.x < 0)
 		// {
