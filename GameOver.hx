@@ -7,16 +7,25 @@ import flixel.ui.FlxButton;
 import flixel.util.FlxAxes;
 import flixel.util.FlxColor;
 
-class GameOverState extends FlxState
+class GameOver extends FlxState
 {
 	var win:Bool; // if we won or lost
 	var titleText:FlxText; // the title text
 	var mainMenuButton:FlxButton; // button to go to main menu
 
-	public function new(win:Bool, score:Int)
+	public function new(win:Bool)
 	{
 		super();
 		this.win = win;
+	}
+
+	function switchToMainMenu():Void // void func: it returns nothing.
+	{
+		// anonymous callback func. that switches to MenuState() after done fading to black
+		FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function()
+		{
+			FlxG.switchState(new MenuState());
+		});
 	}
 
 	override public function create()
@@ -35,14 +44,5 @@ class GameOverState extends FlxState
 		add(mainMenuButton);
 
 		super.create();
-	}
-
-	function switchToMainMenu():Void // void func: it returns nothing.
-	{
-		// anonymous callback func. that switches to MenuState() after done fading to black
-		FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function()
-		{
-			FlxG.switchState(new MenuState());
-		});
 	}
 }

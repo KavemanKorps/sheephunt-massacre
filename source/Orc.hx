@@ -13,7 +13,7 @@ class Orc extends FlxSprite
 
 		// FlxG.random.int(dists);
 
-		velocity.x = -10;
+		velocity.x = -70;
 	}
 
 	public function init(x:Float, y:Float)

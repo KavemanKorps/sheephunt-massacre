@@ -9,6 +9,7 @@ import flixel.group.FlxGroup;
 import flixel.system.FlxSound;
 import flixel.text.FlxText;
 
+// TODO: IF SHOOTER GETS TOUCHED BY ENEMY, DIE.
 class PlayState extends FlxState
 {
 	public var enemiesToSpawn:Int = 0;
@@ -17,6 +18,8 @@ class PlayState extends FlxState
 
 	var _sheep:Shooter;
 	var _vsBullets:FlxGroup;
+
+	var won:Bool;
 
 	var _orcs:FlxTypedGroup<Orc>;
 
@@ -68,15 +71,33 @@ class PlayState extends FlxState
 		super.create();
 	}
 
-	override public function update(elapsed:Float)
-	{
-		FlxG.overlap(bullets, _vsBullets, stuffHitStuff);
-		super.update(elapsed);
-	}
-
 	function stuffHitStuff(Object1:FlxObject, Object2:FlxObject):Void
 	{
 		Object1.kill();
 		Object2.kill();
+	}
+
+	function doneFadeOut()
+	{
+		FlxG.switchState(new GameOver(false));
+	}
+
+	function orcTouchSheep(_sheep:Shooter, enemy:Orc)
+	{
+		// if (player.alive && player.exists && enemy.alive && enemy.exists && !enemy.isFlickering())
+		// {
+		// 	startCombat(enemy);
+		// }
+		_sheep.kill();
+		doneFadeOut();
+	}
+
+	override public function update(elapsed:Float)
+	{
+		super.update(elapsed);
+
+		FlxG.overlap(bullets, _vsBullets, stuffHitStuff);
+
+		FlxG.overlap(_sheep, _orcs, orcTouchSheep);
 	}
 }

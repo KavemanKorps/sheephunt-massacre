@@ -6,10 +6,6 @@ import flixel.util.FlxColor;
 
 class Shooter extends FlxSprite
 {
-	var isForward:Bool;
-	var isUp:Bool;
-	var isDown:Bool;
-
 	public function new(x:Float = 0, y:Float = 0)
 	{
 		// This initializes this sprite object with the graphic of the ship and
@@ -17,7 +13,6 @@ class Shooter extends FlxSprite
 		// super(FlxG.width / 2 - 6, FlxG.height - 12, "assets/ship.png");
 
 		super(x, y);
-		isForward = true;
 		makeGraphic(10, 10, FlxColor.BLUE);
 	}
 
@@ -59,5 +54,10 @@ class Shooter extends FlxSprite
 			}
 		}
 		super.update(elapsed); // why do we need this twice?
+	}
+
+	override function kill()
+	{
+		alive = false;
 	}
 }
