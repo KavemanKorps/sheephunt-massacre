@@ -915,7 +915,7 @@ ApplicationMain.main = function() {
 ApplicationMain.create = function(config) {
 	var app = new openfl_display_Application();
 	ManifestResources.init(config);
-	app.meta.h["build"] = "15";
+	app.meta.h["build"] = "16";
 	app.meta.h["company"] = "HaxeFlixel";
 	app.meta.h["file"] = "shooter-game";
 	app.meta.h["name"] = "shooter-game";
@@ -8504,14 +8504,14 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		var spawns_1 = 15;
 		var spawns_2 = 35;
 		var spawns_3 = 50;
-		var numOrcs = 20;
+		var numOrcs = 30;
 		this._orcs = new flixel_group_FlxTypedGroup(numOrcs);
 		var o;
 		var _g = 0;
 		var _g1 = numOrcs;
 		while(_g < _g1) {
 			var i = _g++;
-			o = new Orc(240 + i * flixel_FlxG.random.int(10,20),100 + (i / 10 | 0) * 32);
+			o = new Orc(240 + i * flixel_FlxG.random.int(10,20),80 + (i / 10 | 0) * 32);
 			this._orcs.add(o);
 		}
 		this.add(this._orcs);
@@ -75920,7 +75920,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 962528;
+	this.version = 992427;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";

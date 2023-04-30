@@ -51,7 +51,7 @@ class PlayState extends FlxState
 		var heights:Array<Int> = [200, 240];
 		var spawns:Array<Int> = [10, 15, 35, 50];
 
-		var numOrcs:Int = 20;
+		var numOrcs:Int = 30;
 		_orcs = new FlxTypedGroup(numOrcs);
 		var o:Orc;
 
@@ -62,6 +62,8 @@ class PlayState extends FlxState
 
 			// X, Y
 			// "+ Std.int(i / 10) * 32" is what breaks it into two rows
+
+			// WHERE ARE THE ROWS OF ENEMIES DEFINED?
 			o = new Orc(240 + (i * FlxG.random.int(10, 20)), 100 + Std.int(i / 10) * 32);
 
 			_orcs.add(o);
@@ -105,6 +107,24 @@ class PlayState extends FlxState
 		// 	startCombat(enemy);
 		// }
 		doneFadeOut();
+	}
+
+	function placeOrcs(enemy:Orc)
+	{
+		var x = entity.x;
+		var y = entity.y;
+
+		switch (entity.name)
+		{
+			case "GROUND":
+				player.setPosition(x, y);
+
+			case "CRAWL":
+				coins.add(new Coin(x + 4, y + 4));
+
+			case "FLY":
+				enemies.add(new Enemy(x + 4, y, REGULAR));
+		}
 	}
 
 	override public function update(elapsed:Float)
