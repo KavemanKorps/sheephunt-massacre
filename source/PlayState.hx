@@ -13,20 +13,29 @@ import flixel.util.FlxColor;
 // TODO: IF SHOOTER GETS TOUCHED BY ENEMY, DIE. DONE
 class PlayState extends FlxState
 {
+	// public variables
+	public var enemiesToKill:Int = 0;
 	public var enemiesToSpawn:Int = 0;
 
+	// public groups
 	public var bullets:FlxTypedGroup<FlxSprite>;
+	public var _orcs:FlxTypedGroup<Orc>;
 
-	var _sheep:Shooter; // WE ARE SIMPLY INITIALIZING OUR VAR. THE ARGS PASSED BELOW v
+	// groups
 	var _vsBullets:FlxGroup;
 
-	var _orcs:FlxTypedGroup<Orc>;
-
+	// sprites
+	var _sheep:Shooter; // WE ARE SIMPLY INITIALIZING OUR VAR. THE ARGS PASSED BELOW v
 	var _house:House;
 
-	// TO SHOW AT THE END OF EVERY ROUND:
+	// text
+	var _waveText:FlxText;
+	var _enemyText:FlxText;
+
+	// variables
 	var won:Bool;
 	var ending:Bool;
+	var _waveCounter:Int = 0;
 
 	override public function create()
 	{
@@ -130,6 +139,12 @@ class PlayState extends FlxState
 		FlxG.overlap(bullets, _vsBullets, stuffHitStuff);
 		FlxG.overlap(_sheep, _orcs, orcTouchSheep);
 		FlxG.overlap(_house, _orcs, orcTouchHouse);
+
+		// NEW STUFF: wave logic
+		if (enemiesToKill == 0)
+		{
+			// nextLevel(currWave);
+		}
 
 		// if (_orcs.x < 0)
 		// {
