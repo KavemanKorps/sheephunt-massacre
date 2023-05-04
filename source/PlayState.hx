@@ -19,10 +19,14 @@ class PlayState extends FlxState
 
 	var _sheep:Shooter; // WE ARE SIMPLY INITIALIZING OUR VAR. THE ARGS PASSED BELOW v
 	var _vsBullets:FlxGroup;
+
 	var _orcs:FlxTypedGroup<Orc>;
+
 	var _house:House;
 
+	// TO SHOW AT THE END OF EVERY ROUND:
 	var won:Bool;
+	var ending:Bool;
 
 	override public function create()
 	{
@@ -60,10 +64,6 @@ class PlayState extends FlxState
 			// ORIGINAL:
 			// a = new Alien(8 + (i % 10) * 32, 24 + Std.int(i / 10) * 32, colors[Std.int(i / 10)], alienBullets);
 
-			// X, Y
-			// "+ Std.int(i / 10) * 32" is what breaks it into two rows
-
-			// WHERE ARE THE ROWS OF ENEMIES DEFINED?
 			o = new Orc(240 + (i * FlxG.random.int(10, 20)), 100 + Std.int(i / 10) * 32);
 
 			_orcs.add(o);
@@ -109,23 +109,19 @@ class PlayState extends FlxState
 		doneFadeOut();
 	}
 
-	function placeOrcs(enemy:Orc)
-	{
-		var x = entity.x;
-		var y = entity.y;
-
-		switch (entity.name)
-		{
-			case "GROUND":
-				player.setPosition(x, y);
-
-			case "CRAWL":
-				coins.add(new Coin(x + 4, y + 4));
-
-			case "FLY":
-				enemies.add(new Enemy(x + 4, y, REGULAR));
-		}
-	}
+	// function placeOrcs(enemy:Orc)
+	// {
+	// 	var x = entity.x;
+	// 	var y = entity.y;
+	// 	switch (entity.name)
+	// 	{
+	// 		case "GROUND":
+	// 			player.setPosition(x, y);
+	// 		case "CRAWL":
+	// 			coins.add(new Coin(x + 4, y + 4));
+	// 		case "FLY":
+	// 			enemies.add(new Enemy(x + 4, y, REGULAR));
+	// 	}
 
 	override public function update(elapsed:Float)
 	{

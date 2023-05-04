@@ -4,36 +4,23 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
 
-enum OrcType
-{
-	GROUND,
-	CRAWL,
-	FLY
-}
-
 class Orc extends FlxSprite
 {
-	public var type(default, null):EnemyType;
-
-	public function new(x:Float = 0, y:Float = 0, type:EnemyType)
+	// public function new(x:Float = 0, y:Float = 0, string:EnemyType)
+	public function new(x:Int = 0, y:Int = 0) // public function new(x:Int = 0, y:Int = 0)
 	{
+		// what is super() again? so that the FlxSprite can actually be drawn lol, easy.
 		super(x, y);
-		this.type = type;
-
-		makeGraphic(10, 10, FlxColor.BLUE);
-
-		// FlxG.random.int(dists);
-
-		velocity.x = -70;
 	}
 
-	public function init(x:Float, y:Float)
+	function updateMovement()
 	{
-		reset(x, y);
+		velocity.x = -70;
 	}
 
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
+		updateMovement();
 	}
 }
