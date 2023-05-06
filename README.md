@@ -26,3 +26,6 @@ Animations:
 -shooting animations (one per weapon)
 -two enemy animations: walking and attacking.
 -death animations (fly enemies fall to ground)
+
+
+TODO: get other projects to stop running shooter-game
